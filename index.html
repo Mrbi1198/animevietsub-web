@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AnimeVietsub - Xem Anime Online Vietsub HD</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    body { background-color: #121315; color: #ccc; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; }
+    .bg-card { background-color: #1e1f23; }
+    .anime-title {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 1.35;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header AnimeVietsub -->
+  <header class="bg-[#18191c] border-b border-gray-800 sticky top-0 z-40 shadow-md">
+    <div class="max-w-6xl mx-auto px-3 py-2.5 flex items-center justify-between gap-3">
+      <div onclick="resetHome()" class="cursor-pointer flex items-center gap-1.5 flex-shrink-0">
+        <span class="text-xl sm:text-2xl font-black text-red-600 tracking-tight">ANIME<span class="text-white">VIETSUB</span></span>
+      </div>
+
+      <div class="flex-1 max-w-sm relative">
+        <input id="searchInput" type="text" placeholder="Tìm tên anime..." 
+          onkeydown="if(event.key==='Enter') doSearch()"
+          class="w-full bg-[#24252a] text-white border border-gray-700 rounded-full py-1.5 px-4 text-xs focus:outline-none focus:border-red-500">
+        <button onclick="doSearch()" class="absolute right-3 top-1.5 text-gray-400 hover:text-red-500 text-sm">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Thanh menu chuyên mục -->
+    <nav class="bg-[#212226] text-xs font-semibold text-gray-300 border-t border-gray-800">
+      <div class="max-w-6xl mx-auto px-3 flex items-center overflow-x-auto whitespace-nowrap scrollbar-none">
+        <button onclick="resetHome()" class="px-3.5 py-2.5 bg-red-600 text-white flex items-center gap-1">
+          <i class="fa-solid fa-house"></i> TRANG CHỦ
+        </button>
+        <button onclick="changeCategory('hoat-hinh', 'ANIME HOẠT HÌNH')" class="px-3.5 py-2.5 hover:text-red-400">
+          ANIME HOẠT HÌNH
+        </button>
+        <button onclick="changeCategory('phim-bo', 'ANIME BỘ')" class="px-3.5 py-2.5 hover:text-red-400">
+          ANIME BỘ
+        </button>
+        <button onclick="changeCategory('phim-le', 'ANIME LẺ / MOVIE')" class="px-3.5 py-2.5 hover:text-red-400">
+          ANIME LẺ
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-3 py-4">
+
+    <!-- Danh sách phim -->
+    <div id="listView">
+      <div class="flex items-center justify-between mb-3 border-b border-gray-800 pb-2">
+        <h2 id="sectionTitle" class="text-sm sm:text-base font-bold text-white uppercase flex items-center gap-2">
+          <span class="w-2 h-4 bg-red-600 rounded-full inline-block"></span>
+          ANIME MỚI CẬP NHẬT
+        </h2>
+        <span id="pageIndicator" class="text-xs text-gray-400 font-medium">Trang 1</span>
+      </div>
+
+      <div id="animeGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+        <div class="col-span-full py-20 text-center text-xs text-gray-500">Đang nạp danh sách anime...</div>
+      </div>
+
+      <!-- Phân trang -->
+      <div class="flex justify-center items-center gap-2 mt-6 mb-10">
+        <button id="btnPrev" onclick="changePage(-1)" class="px-3.5 py-1.5 bg-[#1e1f23] border border-gray-700 rounded text-xs font-semibold hover:border-red-500 disabled:opacity-30">
+          ← Trang trước
+        </button>
+        <span id="pageBadge" class="text-xs font-bold text-red-500 px-3 py-1 bg-[#24252a] border border-gray-700 rounded">1</span>
+        <button id="btnNext" onclick="changePage(1)" class="px-3.5 py-1.5 bg-[#1e1f23] border border-gray-700 rounded text-xs font-semibold hover:border-red-500">
+          Trang sau →
+        </button>
+      </div>
+    </div>
+
+    <!-- Khung xem phim & chọn tập -->
+    <div id="playerView" class="hidden">
+      <button onclick="showHome()" class="text-xs text-gray-400 hover:text-white font-medium mb-3 inline-flex items-center gap-1.5 bg-[#222] px-3 py-1.5 rounded">
+        <i class="fa-solid fa-arrow-left"></i> Quay lại danh sách
+      </button>
+
+      <div class="bg-black rounded-lg overflow-hidden border border-gray-800 aspect-video w-full mb-3 shadow-lg relative">
+        <iframe id="videoPlayer" class="w-full h-full" src="" frameborder="0" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+      </div>
+
+      <div class="bg-card p-4 rounded-lg border border-gray-800 mb-3">
+        <h1 id="currentAnimeTitle" class="text-base sm:text-xl font-bold text-white mb-1"></h1>
+        <div id="currentEpTitle" class="text-xs text-red-400 font-semibold mb-2"></div>
+        <p id="currentAnimeDesc" class="text-xs text-gray-400 leading-relaxed"></p>
+      </div>
+
+      <div class="bg-card p-4 rounded-lg border border-gray-800">
+        <h3 class="text-xs font-bold text-gray-200 uppercase mb-3 flex items-center gap-2">
+          <i class="fa-solid fa-list text-red-500"></i> DANH SÁCH TẬP
+        </h3>
+        <div id="episodeList" class="flex flex-wrap gap-2 max-h-[350px] overflow-y-auto"></div>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    let currentPage = 1;
+    let currentCategoryType = 'hoat-hinh';
+    let searchQuery = '';
+    const BASE_API = 'https://phimapi.com';
+    const CDN_IMG = 'https://phimimg.com';
+
+    async function loadAnimeData() {
+      const grid = document.getElementById('animeGrid');
+      grid.innerHTML = '<div class="col-span-full py-20 text-center text-xs text-gray-500"><i class="fa-solid fa-spinner fa-spin mr-2"></i> Đang tải dữ liệu...</div>';
+
+      let url = '';
+      if (searchQuery) {
+        url = `${BASE_API}/v1/api/tim-kiem?keyword=${encodeURIComponent(searchQuery)}&page=${currentPage}`;
+      } else {
+        url = `${BASE_API}/v1/api/danh-sach/${currentCategoryType}?page=${currentPage}`;
+      }
+
+      try {
+        const res = await fetch(url);
+        const json = await res.json();
+        const items = json?.data?.items || [];
+
+        document.getElementById('pageBadge').innerText = currentPage;
+        document.getElementById('pageIndicator').innerText = `Trang ${currentPage}`;
+        document.getElementById('btnPrev').disabled = (currentPage <= 1);
+
+        if (!items || items.length === 0) {
+          grid.innerHTML = '<div class="col-span-full py-20 text-center text-xs text-gray-400">Không có phim nào ở mục này.</div>';
+          return;
+        }
+
+        grid.innerHTML = items.map(a => {
+          let thumb = a.thumb_url || a.poster_url || '';
+          if (!thumb.startsWith('http')) {
+            thumb = `${CDN_IMG}/${thumb}`;
+          }
+          const epText = a.episode_current || a.time || 'HD';
+
+          return `
+            <div onclick="openAnimeDetail('${a.slug}')" class="bg-card rounded-lg overflow-hidden cursor-pointer hover:border-red-600 border border-transparent transition group shadow">
+              <div class="aspect-[3/4] relative overflow-hidden bg-gray-900">
+                <img src="${thumb}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" loading="lazy">
+                <div class="absolute top-1.5 left-1.5 bg-red-600 text-white font-bold text-[10px] px-1.5 py-0.5 rounded shadow">
+                  ${epText}
+                </div>
+                <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition">
+                  <div class="w-10 h-10 bg-red-600 rounded-full flex items-center justify-center text-white text-sm shadow-lg">
+                    <i class="fa-solid fa-play ml-0.5"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="p-2.5">
+                <h3 class="anime-title text-gray-200 group-hover:text-red-500">${a.name}</h3>
+                <div class="mt-1 flex items-center justify-between text-[11px] text-gray-500">
+                  <span>${a.year || 'Mới'}</span>
+                  <span class="text-red-400 font-medium">Vietsub</span>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('');
+
+      } catch (err) {
+        grid.innerHTML = '<div class="col-span-full py-20 text-center text-xs text-red-500">Lỗi kết nối máy chủ! Vui lòng tải lại.</div>';
+      }
+    }
+
+    async function openAnimeDetail(slug) {
+      document.getElementById('listView').classList.add('hidden');
+      document.getElementById('playerView').classList.remove('hidden');
+      window.scrollTo(0, 0);
+
+      document.getElementById('currentAnimeTitle').innerText = 'Đang tải thông tin phim...';
+      document.getElementById('currentEpTitle').innerText = '';
+      document.getElementById('currentAnimeDesc').innerText = '';
+      document.getElementById('episodeList').innerHTML = '<div class="text-xs text-gray-500 py-3">Đang nạp danh sách tập...</div>';
+
+      try {
+        const res = await fetch(`${BASE_API}/phim/${slug}`);
+        const json = await res.json();
+        const movie = json?.movie;
+
+        document.getElementById('currentAnimeTitle').innerText = movie.name;
+        document.getElementById('currentAnimeDesc').innerText = movie.content ? movie.content.replace(/<[^>]*>?/gm, '') : 'Đang cập nhật nội dung...';
+
+        const episodes = json?.episodes?.[0]?.server_data || [];
+
+        if (episodes.length === 0) {
+          document.getElementById('episodeList').innerHTML = '<div class="text-xs text-gray-400 py-2">Chưa cập nhật tập phim.</div>';
+          return;
+        }
+
+        document.getElementById('episodeList').innerHTML = episodes.map((ep, idx) => `
+          <button onclick="playEpisode('${ep.link_embed}', '${ep.name}')"
+            id="epBtn_${idx}"
+            class="ep-item px-3.5 py-1.5 rounded bg-[#2a2b30] hover:bg-red-600 text-white text-xs font-semibold transition border border-gray-700">
+            ${ep.name}
+          </button>
+        `).join('');
+
+        playEpisode(episodes[0].link_embed, episodes[0].name);
+
+      } catch (err) {
+        document.getElementById('currentAnimeTitle').innerText = 'Lỗi nạp thông tin phim!';
+      }
+    }
+
+    function playEpisode(embedUrl, epName) {
+      document.getElementById('videoPlayer').src = embedUrl;
+      document.getElementById('currentEpTitle').innerText = `Đang xem: ${epName}`;
+      
+      document.querySelectorAll('.ep-item').forEach(btn => {
+        if (btn.innerText.trim() === epName.trim()) {
+          btn.classList.add('bg-red-600', 'border-red-500');
+          btn.classList.remove('bg-[#2a2b30]');
+        } else {
+          btn.classList.remove('bg-red-600', 'border-red-500');
+          btn.classList.add('bg-[#2a2b30]');
+        }
+      });
+    }
+
+    function changePage(delta) {
+      if (currentPage + delta >= 1) {
+        currentPage += delta;
+        loadAnimeData();
+        window.scrollTo(0, 0);
+      }
+    }
+
+    function changeCategory(type, label) {
+      currentCategoryType = type;
+      searchQuery = '';
+      currentPage = 1;
+      document.getElementById('sectionTitle').innerHTML = `<span class="w-2 h-4 bg-red-600 rounded-full inline-block"></span> ${label}`;
+      showHome();
+      loadAnimeData();
+    }
+
+    function doSearch() {
+      const q = document.getElementById('searchInput').value.trim();
+      if (!q) return;
+      searchQuery = q;
+      currentPage = 1;
+      document.getElementById('sectionTitle').innerHTML = `<span class="w-2 h-4 bg-red-600 rounded-full inline-block"></span> KẾT QUẢ TÌM: "${q}"`;
+      showHome();
+      loadAnimeData();
+    }
+
+    function resetHome() {
+      searchQuery = '';
+      currentCategoryType = 'hoat-hinh';
+      currentPage = 1;
+      document.getElementById('sectionTitle').innerHTML = `<span class="w-2 h-4 bg-red-600 rounded-full inline-block"></span> ANIME MỚI CẬP NHẬT`;
+      showHome();
+      loadAnimeData();
+    }
+
+    function showHome() {
+      document.getElementById('listView').classList.remove('hidden');
+      document.getElementById('playerView').classList.add('hidden');
+      document.getElementById('videoPlayer').src = '';
+      window.scrollTo(0, 0);
+    }
+
+    loadAnimeData();
+  </script>
+</body>
+</html>
