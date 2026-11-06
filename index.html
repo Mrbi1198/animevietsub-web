@@ -205,7 +205,7 @@
 
       let url = "";
       if (currentMode === 'home') {
-        url = `https://phimapi.com/danh-sach/phim-moi-cap-nhat?page=${currentPage}`;
+        url = `https://phimapi.com/v1/api/danh-sach/hoat-hinh?page=${currentPage}`;
       } else if (currentMode === 'category') {
         url = `https://phimapi.com/v1/api/danh-sach/${currentQuery}?page=${currentPage}&limit=24&_t=1793867387`;
       } else if (currentMode === 'search') {
