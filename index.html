@@ -65,27 +65,28 @@
       </div>
       <div id="suggestDropdown"></div>
     </div>
-  <!-- GENRE_NAV_START -->
-    <div class="relative inline-block text-left my-2" id="genreContainer">
-        <button id="genreBtn" type="button" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg bg-neutral-800 hover:bg-neutral-700 text-neutral-200 border border-neutral-700 transition">
+  
+<!-- GENRE_NAV_START -->
+    <div class="relative inline-block text-left my-2" id="genreContainer" style="z-index: 60;">
+        <button id="genreBtn" type="button" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg bg-neutral-800 hover:bg-neutral-700 text-neutral-200 border border-neutral-700 transition shadow-sm">
             <span>Thể loại</span>
             <svg class="w-3.5 h-3.5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
         </button>
-        <div id="genreDropdown" class="hidden absolute left-0 mt-2 w-64 max-h-72 overflow-y-auto bg-neutral-900 border border-neutral-800 rounded-xl shadow-2xl z-50 p-2 grid grid-cols-2 gap-1">
-            <button type="button" onclick="filterGenre('hanh-dong', 'Action')" class="text-left px-3 py-2 text-xs text-neutral-300 hover:text-white hover:bg-neutral-800 rounded transition truncate">Action</button>
-<button type="button" onclick="filterGenre('phieu-luu', 'Adventure')" class="text-left px-3 py-2 text-xs text-neutral-300 hover:text-white hover:bg-neutral-800 rounded transition truncate">Adventure</button>
-<button type="button" onclick="filterGenre('hai-huoc', 'Comedy')" class="text-left px-3 py-2 text-xs text-neutral-300 hover:text-white hover:bg-neutral-800 rounded transition truncate">Comedy</button>
-<button type="button" onclick="filterGenre('tam-ly', 'Drama')" class="text-left px-3 py-2 text-xs text-neutral-300 hover:text-white hover:bg-neutral-800 rounded transition truncate">Drama</button>
-<button type="button" onclick="filterGenre('vien-tuong', 'Fantasy')" class="text-left px-3 py-2 text-xs text-neutral-300 hover:text-white hover:bg-neutral-800 rounded transition truncate">Fantasy</button>
-<button type="button" onclick="filterGenre('hoc-duong', 'Học Đường')" class="text-left px-3 py-2 text-xs text-neutral-300 hover:text-white hover:bg-neutral-800 rounded transition truncate">Học Đường</button>
-<button type="button" onclick="filterGenre('kinh-di', 'Horror')" class="text-left px-3 py-2 text-xs text-neutral-300 hover:text-white hover:bg-neutral-800 rounded transition truncate">Horror</button>
-<button type="button" onclick="filterGenre('tinh-cam', 'Romance')" class="text-left px-3 py-2 text-xs text-neutral-300 hover:text-white hover:bg-neutral-800 rounded transition truncate">Romance</button>
-<button type="button" onclick="filterGenre('khoa-hoc-vien-tuong', 'Sci-Fi')" class="text-left px-3 py-2 text-xs text-neutral-300 hover:text-white hover:bg-neutral-800 rounded transition truncate">Sci-Fi</button>
-<button type="button" onclick="filterGenre('shounen', 'Shounen')" class="text-left px-3 py-2 text-xs text-neutral-300 hover:text-white hover:bg-neutral-800 rounded transition truncate">Shounen</button>
-<button type="button" onclick="filterGenre('vo-thuat', 'Martial Arts')" class="text-left px-3 py-2 text-xs text-neutral-300 hover:text-white hover:bg-neutral-800 rounded transition truncate">Martial Arts</button>
-<button type="button" onclick="filterGenre('mecha', 'Mecha')" class="text-left px-3 py-2 text-xs text-neutral-300 hover:text-white hover:bg-neutral-800 rounded transition truncate">Mecha</button>
-<button type="button" onclick="filterGenre('sieu-nhien', 'Supernatural')" class="text-left px-3 py-2 text-xs text-neutral-300 hover:text-white hover:bg-neutral-800 rounded transition truncate">Supernatural</button>
-<button type="button" onclick="filterGenre('bi-an', 'Mystery')" class="text-left px-3 py-2 text-xs text-neutral-300 hover:text-white hover:bg-neutral-800 rounded transition truncate">Mystery</button>
+        <div id="genreDropdown" class="hidden absolute left-0 mt-2 w-64 max-h-80 overflow-y-auto bg-neutral-900/95 backdrop-blur-md border border-neutral-800 rounded-xl shadow-2xl p-2 grid grid-cols-2 gap-1">
+            <button type="button" onclick="openGenrePage('hanh-dong', 'Action', 1)" class="text-left px-3 py-2 text-xs text-neutral-300 hover:text-white hover:bg-neutral-800 rounded-lg transition truncate font-medium">Action</button>
+<button type="button" onclick="openGenrePage('phieu-luu', 'Adventure', 1)" class="text-left px-3 py-2 text-xs text-neutral-300 hover:text-white hover:bg-neutral-800 rounded-lg transition truncate font-medium">Adventure</button>
+<button type="button" onclick="openGenrePage('hai-huoc', 'Comedy', 1)" class="text-left px-3 py-2 text-xs text-neutral-300 hover:text-white hover:bg-neutral-800 rounded-lg transition truncate font-medium">Comedy</button>
+<button type="button" onclick="openGenrePage('tam-ly', 'Drama', 1)" class="text-left px-3 py-2 text-xs text-neutral-300 hover:text-white hover:bg-neutral-800 rounded-lg transition truncate font-medium">Drama</button>
+<button type="button" onclick="openGenrePage('vien-tuong', 'Fantasy', 1)" class="text-left px-3 py-2 text-xs text-neutral-300 hover:text-white hover:bg-neutral-800 rounded-lg transition truncate font-medium">Fantasy</button>
+<button type="button" onclick="openGenrePage('hoc-duong', 'Học Đường', 1)" class="text-left px-3 py-2 text-xs text-neutral-300 hover:text-white hover:bg-neutral-800 rounded-lg transition truncate font-medium">Học Đường</button>
+<button type="button" onclick="openGenrePage('kinh-di', 'Horror', 1)" class="text-left px-3 py-2 text-xs text-neutral-300 hover:text-white hover:bg-neutral-800 rounded-lg transition truncate font-medium">Horror</button>
+<button type="button" onclick="openGenrePage('tinh-cam', 'Romance', 1)" class="text-left px-3 py-2 text-xs text-neutral-300 hover:text-white hover:bg-neutral-800 rounded-lg transition truncate font-medium">Romance</button>
+<button type="button" onclick="openGenrePage('khoa-hoc-vien-tuong', 'Sci-Fi', 1)" class="text-left px-3 py-2 text-xs text-neutral-300 hover:text-white hover:bg-neutral-800 rounded-lg transition truncate font-medium">Sci-Fi</button>
+<button type="button" onclick="openGenrePage('shounen', 'Shounen', 1)" class="text-left px-3 py-2 text-xs text-neutral-300 hover:text-white hover:bg-neutral-800 rounded-lg transition truncate font-medium">Shounen</button>
+<button type="button" onclick="openGenrePage('vo-thuat', 'Martial Arts', 1)" class="text-left px-3 py-2 text-xs text-neutral-300 hover:text-white hover:bg-neutral-800 rounded-lg transition truncate font-medium">Martial Arts</button>
+<button type="button" onclick="openGenrePage('mecha', 'Mecha', 1)" class="text-left px-3 py-2 text-xs text-neutral-300 hover:text-white hover:bg-neutral-800 rounded-lg transition truncate font-medium">Mecha</button>
+<button type="button" onclick="openGenrePage('sieu-nhien', 'Supernatural', 1)" class="text-left px-3 py-2 text-xs text-neutral-300 hover:text-white hover:bg-neutral-800 rounded-lg transition truncate font-medium">Supernatural</button>
+<button type="button" onclick="openGenrePage('bi-an', 'Mystery', 1)" class="text-left px-3 py-2 text-xs text-neutral-300 hover:text-white hover:bg-neutral-800 rounded-lg transition truncate font-medium">Mystery</button>
 
         </div>
     </div>
@@ -122,7 +123,29 @@
         <span>Tải thêm phim</span>
       </button>
     </div>
-  </main>
+  <!-- GENRE_PAGE_CONTAINER_START -->
+    <section id="genrePageSection" class="hidden min-h-screen px-4 pb-28 max-w-7xl mx-auto">
+        <div class="flex items-center justify-between py-4 border-b border-neutral-800 mb-6">
+            <div class="flex items-center gap-3">
+                <button type="button" onclick="closeGenrePage()" class="px-3 py-1.5 bg-neutral-800 hover:bg-neutral-700 text-neutral-200 rounded-lg border border-neutral-700 text-xs flex items-center gap-1.5 font-medium transition">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                    <span>Trang chủ</span>
+                </button>
+                <h2 id="genrePageHeading" class="text-base sm:text-lg font-bold text-white tracking-wide">Thể loại</h2>
+            </div>
+            <span id="genreTotalBadge" class="text-xs bg-neutral-800 text-neutral-400 px-2.5 py-1 rounded-full border border-neutral-700">Trang 1</span>
+        </div>
+
+        <div id="genreMoviesGrid" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-3"></div>
+
+        <div class="flex items-center justify-center gap-3 mt-10 py-6 border-t border-neutral-800" id="genrePagination">
+            <button id="genrePrevBtn" onclick="changeGenrePage(-1)" class="px-4 py-2 text-xs font-semibold rounded-lg bg-neutral-800 hover:bg-neutral-700 disabled:opacity-30 disabled:pointer-events-none text-white border border-neutral-700 transition">← Trang trước</button>
+            <span id="genrePageIndicator" class="text-xs text-neutral-400 font-medium">Trang 1</span>
+            <button id="genreNextBtn" onclick="changeGenrePage(1)" class="px-4 py-2 text-xs font-semibold rounded-lg bg-neutral-800 hover:bg-neutral-700 disabled:opacity-30 disabled:pointer-events-none text-white border border-neutral-700 transition">Trang sau →</button>
+        </div>
+    </section>
+    <!-- GENRE_PAGE_CONTAINER_END -->
+</main>
 
   <!-- Modal xem phim & chi tiết -->
   <div id="movieModal" class="fixed inset-0 z-[100] bg-black/95 backdrop-blur hidden overflow-y-auto p-4">
@@ -466,8 +489,14 @@
 
 
 
+
 <!-- GENRE_SCRIPT_START -->
     <script>
+    let currentGenreSlug = "";
+    let currentGenreName = "";
+    let currentGenrePage = 1;
+    let maxGenrePages = 1;
+
     document.addEventListener("DOMContentLoaded", () => {
         const btn = document.getElementById("genreBtn");
         const menu = document.getElementById("genreDropdown");
@@ -484,50 +513,89 @@
         }
     });
 
-    async function filterGenre(slug, name) {
+    function closeGenrePage() {
+        const genreSec = document.getElementById("genrePageSection");
+        if (genreSec) genreSec.classList.add("hidden");
+        document.querySelectorAll("main > *:not(#genrePageSection), header ~ div:not(#genrePageSection)").forEach(el => {
+            if (el.id !== "genrePageSection" && !el.contains(genreSec)) {
+                el.style.display = "";
+            }
+        });
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    async function openGenrePage(slug, name, page = 1) {
+        currentGenreSlug = slug;
+        currentGenreName = name;
+        currentGenrePage = page;
+
         const menu = document.getElementById("genreDropdown");
         if (menu) menu.classList.add("hidden");
 
-        // Tìm đúng container danh sách phim thực tế
-        const grid = document.querySelector("#moviesList, #movieList, #movies-grid, .grid");
-        if (!grid) return;
+        document.querySelectorAll("main > *:not(#genrePageSection), header ~ div:not(#genrePageSection)").forEach(el => {
+            if (el.id !== "genrePageSection" && !el.id.includes("footer") && !el.contains(document.getElementById("genrePageSection"))) {
+                el.style.display = "none";
+            }
+        });
 
-        // Cập nhật tiêu đề chuyên mục
-        const sectionTitle = document.querySelector("h2, h3");
-        if (sectionTitle) sectionTitle.textContent = "Thể loại: " + name;
+        const genreSec = document.getElementById("genrePageSection");
+        const heading = document.getElementById("genrePageHeading");
+        const grid = document.getElementById("genreMoviesGrid");
+        const indicator = document.getElementById("genrePageIndicator");
+        const badge = document.getElementById("genreTotalBadge");
+        const prevBtn = document.getElementById("genrePrevBtn");
+        const nextBtn = document.getElementById("genreNextBtn");
 
-        grid.innerHTML = `<div class="col-span-full py-12 text-center text-neutral-400 text-sm">Đang tải thể loại ${name}...</div>`;
+        if (!genreSec || !grid) return;
+
+        genreSec.classList.remove("hidden");
+        heading.textContent = "Thể loại: " + name;
+        grid.innerHTML = '<div class="col-span-full py-20 text-center text-neutral-400 text-sm animate-pulse">Đang tải thể loại ' + name + ' (Trang ' + page + ')...</div>';
+        window.scrollTo({ top: 0, behavior: "smooth" });
 
         try {
-            const res = await fetch(`https://phimapi.com/v1/api/the-loai/${slug}?page=1&limit=24`);
+            const res = await fetch(`https://phimapi.com/v1/api/the-loai/${slug}?page=${page}&limit=24`);
             const data = await res.json();
             const items = data?.data?.items || data?.items || [];
+            const pagination = data?.data?.params?.pagination || {};
+
+            maxGenrePages = pagination.totalPages || Math.ceil((pagination.totalItems || 100) / (pagination.totalItemsPerPage || 24)) || 10;
+
+            indicator.textContent = `Trang ${page} / ${maxGenrePages}`;
+            badge.textContent = `Trang ${page} / ${maxGenrePages}`;
+            prevBtn.disabled = page <= 1;
+            nextBtn.disabled = page >= maxGenrePages;
 
             if (items.length > 0) {
-                // Kiểm tra và tái sử dụng hàm render có sẵn
-                if (typeof renderMovies === "function") {
-                    renderMovies(items);
-                } else if (typeof renderMovieList === "function") {
-                    renderMovieList(items);
-                } else if (typeof displayMovies === "function") {
-                    displayMovies(items);
-                } else {
-                    // Fallback render nếu web dùng cấu trúc card chuẩn
-                    grid.innerHTML = items.map(m => `
-                        <div class="cursor-pointer group" onclick="loadMovieDetail('${m.slug}')">
-                            <div class="relative aspect-[2/3] rounded-lg overflow-hidden bg-neutral-800">
-                                <img src="https://phimimg.com/${m.poster_url || m.thumb_url}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" loading="lazy" />
-                            </div>
-                            <h4 class="mt-2 text-xs font-medium text-neutral-200 truncate">${m.name}</h4>
-                            <p class="text-[10px] text-neutral-500 truncate">${m.origin_name || ''}</p>
+                grid.innerHTML = items.map(m => {
+                    const poster = m.poster_url || m.thumb_url || "";
+                    const imgUrl = poster.startsWith("http") ? poster : `https://phimimg.com/${poster}`;
+                    const episodeBadge = m.episode_current ? `<span class="absolute top-1.5 left-1.5 bg-red-600/90 text-white text-[10px] font-bold px-1.5 py-0.5 rounded shadow">${m.episode_current}</span>` : "";
+                    const qualityBadge = m.quality ? `<span class="absolute top-1.5 right-1.5 bg-yellow-500/90 text-black text-[10px] font-extrabold px-1.5 py-0.5 rounded shadow">${m.quality}</span>` : "";
+
+                    return `
+                    <div class="cursor-pointer group flex flex-col" onclick="typeof loadMovieDetail === 'function' ? loadMovieDetail('${m.slug}') : (window.location.hash = '${m.slug}')">
+                        <div class="relative aspect-[2/3] rounded-xl overflow-hidden bg-neutral-800 shadow-md">
+                            <img src="${imgUrl}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" loading="lazy" onerror="this.src='https://via.placeholder.com/300x450?text=No+Cover'"/>
+                            ${episodeBadge}
+                            ${qualityBadge}
                         </div>
-                    `).join("");
-                }
+                        <h4 class="mt-2 text-xs font-semibold text-neutral-100 truncate group-hover:text-yellow-400 transition">${m.name}</h4>
+                        <p class="text-[10px] text-neutral-400 truncate">${m.origin_name || ''}</p>
+                    </div>`;
+                }).join("");
             } else {
-                grid.innerHTML = `<div class="col-span-full py-12 text-center text-neutral-400 text-sm">Chưa có phim cho thể loại này.</div>`;
+                grid.innerHTML = '<div class="col-span-full py-20 text-center text-neutral-400 text-sm">Chưa có phim trong mục này.</div>';
             }
         } catch (err) {
-            grid.innerHTML = `<div class="col-span-full py-12 text-center text-red-400 text-sm">Không thể nạp dữ liệu: ${err.message}</div>`;
+            grid.innerHTML = `<div class="col-span-full py-20 text-center text-red-400 text-sm">Lỗi tải dữ liệu: ${err.message}</div>`;
+        }
+    }
+
+    function changeGenrePage(offset) {
+        const targetPage = currentGenrePage + offset;
+        if (targetPage >= 1 && targetPage <= maxGenrePages) {
+            openGenrePage(currentGenreSlug, currentGenreName, targetPage);
         }
     }
     </script>
